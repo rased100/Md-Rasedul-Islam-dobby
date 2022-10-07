@@ -1,20 +1,24 @@
 import React from 'react';
-import { useSignInWithEmailAndPassword, useSignInWithGoogle } from 'react-firebase-hooks/auth';
+import { useCreateUserWithEmailAndPassword, useSignInWithGoogle, useUpdateProfile } from 'react-firebase-hooks/auth';
 import auth from '../../firebase.init';
 import { useForm } from "react-hook-form";
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
-const Login = () => {
+const Signup = () => {
     const [signInWithGoogle, gUser, gLoading, gError,] = useSignInWithGoogle(auth);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [
-        signInWithEmailAndPassword,
+        createUserWithEmailAndPassword,
         user,
         loading,
         error,
-    ] = useSignInWithEmailAndPassword(auth);
+    ] = useCreateUserWithEmailAndPassword(auth);
 
-    if (loading || gLoading) {
+    const [updateProfile, updating, updateError] = useUpdateProfile(auth);
+
+    const navigate = useNavigate();
+
+    if (loading || gLoading || updating) {
         return <>
             <div className="flex items-center justify-center ">
                 <div className="w-16 h-16 border-b-2 border-gray-900 rounded-full animate-spin"></div>
@@ -29,21 +33,44 @@ const Login = () => {
 
     let signInError;
 
-    if (error || gError) {
+    if (error || gError || updateError) {
         signInError = <p className='text-red-500'>{error?.message || gError?.message}</p>
     }
 
-    const onSubmit = (data) => {
-        console.log(data);
-        signInWithEmailAndPassword(data.email, data.password);
+    const onSubmit = async data => {
+        // console.log(data);
+        createUserWithEmailAndPassword(data.email, data.password);
+        await updateProfile({ displayName: data.name });
+        console.log('update done');
+        navigate('/');
     };
-
     return (
         <div className='flex h-auto justify-center items-center'>
             <div className="card w-96 bg-base-100 shadow-xl">
                 <div className="card-body">
-                    <h2 className="text-center">Login</h2>
+                    <h2 className="text-center">Signup</h2>
                     <form onSubmit={handleSubmit(onSubmit)}>
+
+                        {/* Name */}
+                        <div className="form-control w-full max-w-xs">
+                            <label className="label">
+                                <span className="label-text">Name</span>
+                            </label>
+                            <input
+                                type="text"
+                                placeholder="Your Name"
+                                className="input input-bordered w-full max-w-xs"
+                                {...register("name", {
+                                    required: {
+                                        value: true,
+                                        message: 'Name is Required'
+                                    }
+                                })}
+                            />
+                            <label className="label">
+                                {errors.name?.type === 'required' && <span className="label-text-alt text-red-500">{errors.name.message}</span>}
+                            </label>
+                        </div>
 
                         {/* Email */}
                         <div className="form-control w-full max-w-xs">
@@ -103,9 +130,9 @@ const Login = () => {
 
                         {/* Login */}
 
-                        <input className='btn w-full max-w-xs text-white' type="submit" value="Login" />
+                        <input className='btn w-full max-w-xs text-white' type="submit" value="Signup" />
                     </form>
-                    <p><small>New to hello Doctor? <Link className='text-primary' to="/signUp">Create New Account</Link></small></p>
+                    <p><small>Already have an account? <Link className='text-primary' to="/login">Please Login</Link></small></p>
 
                     <div className="divider">OR</div>
 
@@ -121,4 +148,4 @@ const Login = () => {
     );
 };
 
-export default Login;
+export default Signup;
