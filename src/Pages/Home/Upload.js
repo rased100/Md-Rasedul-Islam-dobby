@@ -4,7 +4,7 @@ import { useForm } from "react-hook-form";
 
 const Upload = () => {
 
-    const { register, formState: { errors }, handleSubmit } = useForm();
+    const { register, formState: { errors }, handleSubmit, reset } = useForm();
 
 
     const imageStorageKey = 'd01560e63c2614f23eb8b648dee31350';
@@ -27,6 +27,25 @@ const Upload = () => {
                         name: data.name,
                         img: img
                     }
+                    // send to database 
+                    fetch('http://localhost:5000/gallery', {
+                        method: 'POST',
+                        headers: {
+                            'content-type': 'application/json',
+                        },
+                        body: JSON.stringify(gallery)
+                    })
+                        .then(res => res.json())
+                        .then(inserted => {
+                            if (inserted.insertedId) {
+                                console.log('Image uploaded successfully');
+                                reset();
+                            }
+                            else {
+                                console.log('Failed to Upload Image');
+                            }
+                        })
+
                 }
             })
     };
