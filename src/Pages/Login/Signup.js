@@ -128,7 +128,7 @@ const Signup = () => {
                         </div>
                         {signInError}
 
-                        {/* Login */}
+                        {/* Sign up */}
 
                         <input className='btn w-full max-w-xs text-white' type="submit" value="Signup" />
                     </form>
