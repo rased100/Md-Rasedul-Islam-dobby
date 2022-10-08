@@ -35,10 +35,9 @@ const Navbar = () => {
                 </ul>
             </div>
             <div className="navbar-end">
-                <Link to="/upload" className="btn mx-2">Upload Image</Link>
                 {user ? <Link className="btn mx-2" onClick={logout}>SignOut</Link> : <>
-                    <Link to="/login" className="btn mx-2">Login</Link>
-                    <Link to='/signup' className="btn mx-2">Signup</Link>
+                    <Link to="/login" className="btn mx-1">Login</Link>
+                    <Link to='/signup' className="btn mx-0">Signup</Link>
                 </>}
 
             </div>
