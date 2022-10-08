@@ -14,16 +14,10 @@ const Gallery = () => {
                 .then(data => setGallery(data));
         }
     }, [user]);
-    let yourImage;
-    if (user) {
-        yourImage = <h2 className="text-3xl py-10">{user.displayName}'s Images</h2>
-    }
-    else {
-        yourImage = <h2 className="text-3xl py-10">Your Images</h2>
-    }
+
     return (
         <div className='py-10'>
-            {yourImage}
+            <h2 className="text-3xl py-10">All Images</h2>
             <div className='flex justify-center'>
                 <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5'>
                     {

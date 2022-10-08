@@ -2,6 +2,7 @@ import React from 'react';
 import { useForm } from "react-hook-form";
 import auth from '../../firebase.init';
 import { useAuthState } from 'react-firebase-hooks/auth';
+import { Link, useNavigate } from 'react-router-dom';
 
 
 
@@ -9,6 +10,8 @@ const Upload = () => {
 
     const { register, formState: { errors }, handleSubmit, reset } = useForm();
     const [user, loading, error] = useAuthState(auth);
+
+    const navigate = useNavigate();
 
 
     const imageStorageKey = 'd01560e63c2614f23eb8b648dee31350';
@@ -45,8 +48,9 @@ const Upload = () => {
                         .then(res => res.json())
                         .then(inserted => {
                             if (inserted.insertedId) {
-                                console.log('Image uploadnpm ed successfully');
+                                console.log('Image uploaded successfully');
                                 reset();
+                                navigate('/');
                             }
                             else {
                                 console.log('Failed to Upload Image');
@@ -110,7 +114,7 @@ const Upload = () => {
                                 </label>
                             </div>
 
-                            {/* Login */}
+                            {/* Upload */}
 
                             <input className='btn w-full max-w-xs text-white' type="submit" value="Upload" />
                         </form>

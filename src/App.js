@@ -7,6 +7,7 @@ import Login from "./Pages/Login/Login";
 import Signup from "./Pages/Login/Signup";
 import Upload from "./Pages/Home/Upload";
 import RequireLogin from "./Pages/Login/RequireLogin";
+import Search from "./Pages/Home/Search";
 
 function App() {
   return (
@@ -20,6 +21,12 @@ function App() {
           element={
             <RequireLogin>
               <Upload />
+            </RequireLogin>
+          } />
+        <Route path="search"
+          element={
+            <RequireLogin>
+              <Search />
             </RequireLogin>
           } />
       </Routes>
