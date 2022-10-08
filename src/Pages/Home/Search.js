@@ -13,7 +13,7 @@ const Search = () => {
             name: event.target.name.value
         }
         const inputSearch = search.name;
-        const url = `http://localhost:5000/search?name=${inputSearch}`;
+        const url = `https://calm-beyond-66537.herokuapp.com/search?name=${inputSearch}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setResult(data));

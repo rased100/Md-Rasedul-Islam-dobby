@@ -38,7 +38,7 @@ const Upload = () => {
                         uploadby: uploadby
                     }
                     // send to database 
-                    fetch('http://localhost:5000/gallery', {
+                    fetch('https://calm-beyond-66537.herokuapp.com/gallery', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',
