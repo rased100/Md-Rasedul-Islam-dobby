@@ -30,15 +30,18 @@ const Upload = () => {
             .then(result => {
                 if (result.success) {
                     console.log('dbuser', user.email)
+                    console.log('name+email', data.name)
+                    const nameEmail = data.name + " " + "by" + " " + user.email;
                     const uploadby = user.email;
                     const img = result.data.url;
                     const gallery = {
-                        name: data.name,
+                        name: nameEmail,
+                        // name: data.name,
                         img: img,
                         uploadby: uploadby
                     }
                     // send to database 
-                    fetch('https://calm-beyond-66537.herokuapp.com/gallery', {
+                    fetch('http://localhost:5000/gallery', {
                         method: 'POST',
                         headers: {
                             'content-type': 'application/json',

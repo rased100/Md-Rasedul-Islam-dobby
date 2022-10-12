@@ -5,7 +5,7 @@ import Search from './Search';
 const Home = () => {
     return (
         <div>
-            {/* <Search></Search> */}
+            <Search></Search>
             <Gallery></Gallery>
         </div>
     );

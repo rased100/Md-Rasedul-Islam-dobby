@@ -5,6 +5,7 @@ import SearchResult from './SearchResult';
 
 const Search = () => {
     const [result, setResult] = useState([]);
+    const [user, loading, error] = useAuthState(auth);
 
     const handleSearch = event => {
         event.preventDefault();
@@ -12,8 +13,9 @@ const Search = () => {
         let search = {
             name: event.target.name.value
         }
-        const inputSearch = search.name;
-        const url = `https://calm-beyond-66537.herokuapp.com/search?name=${inputSearch}`;
+        const inputSearch = search.name + " " + "by" + " " + user.email;
+        // const inputSearch = search.name;
+        const url = `http://localhost:5000/search?name=${inputSearch}`;
         fetch(url)
             .then(res => res.json())
             .then(data => setResult(data));
