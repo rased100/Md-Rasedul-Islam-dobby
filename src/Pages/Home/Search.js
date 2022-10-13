@@ -38,7 +38,7 @@ const Search = () => {
         <h2 className="text-3xl py-2">Search your image by name</h2><br />
         <h2 className="text-3xl py-2">or</h2><br />
         <h2 className="text-3xl py-2"><Link to="upload" className='text-cyan-500'>upload</Link> image in your <Link to="upload" className='text-cyan-500'>gallery</Link></h2><br />
-        <p>{user.email}</p>
+        <p>{user?.email}</p>
     </>
     if (result.length !== 0) {
         searchResult = searchFound;
