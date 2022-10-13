@@ -19,7 +19,25 @@ const Search = () => {
         fetch(url)
             .then(res => res.json())
             .then(data => setResult(data));
+    }
 
+    let searchResult;
+    const searchFound = <>
+        <div className='flex justify-center'>
+            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto'>
+                {
+                    result.map(result => <SearchResult result={result} key={result._id}></SearchResult>)
+                }
+            </div>
+        </div>
+    </>
+    const searchNotFound = <>
+        <h2 className="text-3xl py-10">No Result Found !</h2>
+    </>
+    if (result.length !== 0) {
+        searchResult = searchFound;
+    } else {
+        searchResult = searchNotFound;
     }
 
     return (
@@ -39,13 +57,7 @@ const Search = () => {
                             </div>
                         </form>
                     </div>
-                    <div className='flex justify-center'>
-                        <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 mx-auto'>
-                            {
-                                result.map(result => <SearchResult result={result} key={result._id}></SearchResult>)
-                            }
-                        </div>
-                    </div>
+                    {searchResult}
                 </div>
             </div>
         </>
