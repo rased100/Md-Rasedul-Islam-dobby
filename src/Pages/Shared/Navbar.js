@@ -23,25 +23,24 @@ const Navbar = () => {
                         <li><Link to="/">Home</Link></li>
                         <li><Link to="upload">Upload</Link></li>
                         <li><Link to="gallery">Gallery</Link></li>
-                        {/* <li><Link to="search">Search Your Image</Link></li> */}
+                        {user ? <li><Link className='text-cyan-500' onClick={logout}>SignOut</Link></li> : <>
+                            <li><Link className='text-cyan-500' to="/login">Login</Link></li>
+                            <li><Link className='text-cyan-500' to='/signup'>Signup</Link></li>
+                        </>}
                     </ul>
                 </div>
                 <a className="btn btn-ghost normal-case text-xl bg-primary mx-2"><img src={logo} alt="dobby" /></a>
             </div>
-            <div className="navbar-center hidden lg:flex">
+            <div className="navbar-end hidden lg:flex">
                 <ul className="menu menu-horizontal p-0">
                     <li><Link to="/">Home</Link></li>
                     <li><Link to="upload">Upload</Link></li>
                     <li><Link to="gallery">Gallery</Link></li>
-                    {/* <li><Link to="search">Search Your Image</Link></li> */}
+                    {user ? <li><Link className='text-cyan-500' onClick={logout}>SignOut</Link></li> : <>
+                        <li><Link className='text-cyan-500' to="/login">Login</Link></li>
+                        <li><Link className='text-cyan-500' to='/signup'>Signup</Link></li>
+                    </>}
                 </ul>
-            </div>
-            <div className="navbar-end">
-                {user ? <Link className="btn mx-2" onClick={logout}>SignOut</Link> : <>
-                    <Link to="/login" className="btn mx-1">Login</Link>
-                    <Link to='/signup' className="btn mx-0">Signup</Link>
-                </>}
-
             </div>
         </div>
     );
