@@ -9,7 +9,7 @@ const Gallery = () => {
 
     useEffect(() => {
         if (user) {
-            fetch(`http://localhost:5000/gallery?uploadby=${user.email}`)
+            fetch(`https://calm-beyond-66537.herokuapp.com/gallery?uploadby=${user.email}`)
                 .then(res => res.json())
                 .then(data => setGallery(data));
         }
